@@ -18,3 +18,7 @@ void MythicalRuins::BoundingBox::OnTrigger(MythicalRuins::Object *other) {
 void MythicalRuins::BoundingBox::OnTriggerEnter(MythicalRuins::Object *other) {
     Logger::logInfo("BoundingBox Triggered by enter state: ");
 }
+
+void MythicalRuins::BoundingBox::OnTriggerExit(MythicalRuins::Object *other) {
+    Logger::logInfo("BoundingBox Triggered by exit state: ");
+}

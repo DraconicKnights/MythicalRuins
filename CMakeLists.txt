@@ -53,6 +53,10 @@ add_executable(MythicalRuins main.cpp
         Core/System/SystemsControllers/PhysicsController.h
         Core/Render/Object/Objects/BoundingBox.cpp
         Core/Render/Object/Objects/BoundingBox.h
+        Core/System/SystemsControllers/DebugConsoleController.cpp
+        Core/System/SystemsControllers/DebugConsoleController.h
+        Core/System/SystemsControllers/NetworkController.cpp
+        Core/System/SystemsControllers/NetworkController.h
 )
 
 target_link_libraries(${PROJECT_NAME} raylib)

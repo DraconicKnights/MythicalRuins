@@ -1,6 +1,9 @@
 #ifndef LOGGER_H
 #define LOGGER_H
 
+#include <functional>
+#include <string_view>
+
 namespace MythicalRuins {
 
     enum LogLevel {
@@ -13,7 +16,12 @@ namespace MythicalRuins {
 
     class Logger {
     public:
+        using Sink = std::function<void(const char* message, LogLevel levle)>;
+
         static void setLogLevel(LogLevel level);
+
+        static void AddSink(Sink sink);
+        static void ClearSinks();
 
         static void Log(const char* message, LogLevel level);
         static void logDebug(const char* message);
@@ -24,6 +32,7 @@ namespace MythicalRuins {
 
     private:
         static LogLevel m_logLevel;
+        static std::vector<Sink> m_Sinks;
     };
 
 } // MythicalRuins

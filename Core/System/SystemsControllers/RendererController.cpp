@@ -21,6 +21,7 @@ void MythicalRuins::RendererController::OnUpdate() {
 
     rlImGuiBegin();
     app->GetMenuController().BuildUI();
+    app->GetDebugConsoleController().render();
     rlImGuiEnd();
 
     EndDrawing();

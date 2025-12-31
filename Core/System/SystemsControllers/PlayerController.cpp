@@ -1,6 +1,5 @@
 #include "PlayerController.h"
 #include "../../Application.h"
-#include "../../Render/Entity/Entites/Player.h"
 #include "../../Render/Object/Objects/BoundingBox.h"
 
 void MythicalRuins::PlayerController::OnStart() {
@@ -40,6 +39,8 @@ void MythicalRuins::PlayerController::OnFixedUpdate() {
     if (input.Down(InputAction::MoveBack)) m_PlayerState.Pos.y += m_PlayerState.Speed * dt;
     if (input.Down(InputAction::MoveLeft)) m_PlayerState.Pos.x -= m_PlayerState.Speed * dt;
     if (input.Down(InputAction::MoveRight)) m_PlayerState.Pos.x += m_PlayerState.Speed * dt;
+
+    if (input.Down(InputAction::OpenDebugConsole)) app->GetDebugConsoleController().toggle();
 
     auto& physics = app->GetPhysicsController();
     Vector2 desired = m_PlayerState.Pos;

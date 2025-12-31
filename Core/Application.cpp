@@ -73,6 +73,8 @@ void MythicalRuins::Application::IntiApp() {
     m_EventListener.BindKey(InputAction::MoveRight, KEY_D);
     m_EventListener.BindKey(InputAction::MoveLeft, KEY_A);
 
+    m_EventListener.BindKey(InputAction::OpenDebugConsole, KEY_F10);
+
     m_EventListener.BindMouse(InputAction::DeltaLeftClick, MOUSE_BUTTON_LEFT);
     m_EventListener.BindMouse(InputAction::DeltaRightClick, MOUSE_BUTTON_RIGHT);
 

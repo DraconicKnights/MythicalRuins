@@ -2,6 +2,7 @@
 #include <iostream>
 
 MythicalRuins::LogLevel MythicalRuins::Logger::m_logLevel = LogLevel::Info;
+std::vector<MythicalRuins::Logger::Sink> MythicalRuins::Logger::m_Sinks;
 
 void MythicalRuins::Logger::setLogLevel(MythicalRuins::LogLevel level) {
     m_logLevel = level;
@@ -46,4 +47,12 @@ void MythicalRuins::Logger::logError(const char* message) {
 }
 void MythicalRuins::Logger::logCritical(const char* message) {
     Log(message, Critical);
+}
+
+void MythicalRuins::Logger::AddSink(Sink sink) {
+    m_Sinks.push_back(std::move(sink));
+}
+
+void MythicalRuins::Logger::ClearSinks() {
+    m_Sinks.clear();
 }

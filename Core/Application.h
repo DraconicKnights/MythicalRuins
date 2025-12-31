@@ -11,6 +11,7 @@
 #include "World/ObjectLoaderManager.h"
 #include "System/SystemsControllers/MainMenuController.h"
 #include "System/SystemsControllers/PhysicsController.h"
+#include "System/SystemsControllers/DebugConsoleController.h"
 
 namespace MythicalRuins {
 
@@ -49,9 +50,11 @@ namespace MythicalRuins {
 
         ApplicationSpecification GetAppSpecs() const { return m_AppSpecs; }
         InputEventListener& GetInputController() { return m_EventListener; }
-        MainMenuController& GetMenuController() { return m_MenuController; }
         ObjectLoaderManager& GetObjectController() { return m_ObjectLoader; }
         PhysicsController& GetPhysicsController() { return m_PhysicsController; }
+
+        MainMenuController& GetMenuController() { return m_MenuController; }
+        DebugConsoleController& GetDebugConsoleController() { return m_DebugConsoleController; }
 
     private:
         void IntiApp();
@@ -65,10 +68,12 @@ namespace MythicalRuins {
 
         ApplicationSpecification m_AppSpecs;
         InputEventListener m_EventListener;
-        MainMenuController m_MenuController;
         SystemManager m_SystemManager;
         ObjectLoaderManager m_ObjectLoader;
         PhysicsController m_PhysicsController;
+
+        MainMenuController m_MenuController;
+        DebugConsoleController m_DebugConsoleController;
     };
 
 } // MythicalRuins

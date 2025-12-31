@@ -14,7 +14,8 @@ namespace MythicalRuins {
 
         void Render() override;
         void OnTrigger(Object* other) override;
-        void OnTriggerEnter(Object *other);
+        void OnTriggerEnter(Object *other) override;
+        void OnTriggerExit(Object *other) override;
     };
 
 } // MythicalRuins

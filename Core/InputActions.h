@@ -4,12 +4,18 @@
 namespace MythicalRuins {
 
     enum class InputAction {
+        // Movement and Player Actions
         MoveForward,
         MoveRight,
         MoveLeft,
         MoveBack,
         DeltaLeftClick,
         DeltaRightClick,
+
+        // Debug Actions
+        OpenDebugConsole,
+
+        // Util Actions
         Quit
     };
 
