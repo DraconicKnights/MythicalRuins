@@ -49,14 +49,20 @@ add_executable(MythicalRuins main.cpp
         Core/World/ObjectLoaderManager.h
         Core/System/SystemsControllers/MainMenuController.cpp
         Core/System/SystemsControllers/MainMenuController.h
-        Core/System/SystemsControllers/PhysicsController.cpp
-        Core/System/SystemsControllers/PhysicsController.h
+        Core/System/Physics/PhysicsController.cpp
+        Core/System/Physics/PhysicsController.h
         Core/Render/Object/Objects/BoundingBox.cpp
         Core/Render/Object/Objects/BoundingBox.h
         Core/System/SystemsControllers/DebugConsoleController.cpp
         Core/System/SystemsControllers/DebugConsoleController.h
-        Core/System/SystemsControllers/NetworkController.cpp
-        Core/System/SystemsControllers/NetworkController.h
+        Core/System/Networking/NetworkController.cpp
+        Core/System/Networking/NetworkController.h
+        Core/Map/TileMap.cpp
+        Core/Map/TileMap.h
+        Core/Manager/InputManager.cpp
+        Core/Manager/InputManager.h
+        Utils/ScopedTimer.h
+        Core/System/Singleton.h
 )
 
 target_link_libraries(${PROJECT_NAME} raylib)

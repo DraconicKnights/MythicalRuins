@@ -2,7 +2,7 @@
 #include "../../Application.h"
 
 void MythicalRuins::PhysicsController::OnStart() {
-
+    m_ObjectLoader = ObjectLoaderManager::Get();
 }
 
 void MythicalRuins::PhysicsController::OnUpdate() {
@@ -17,6 +17,11 @@ void MythicalRuins::PhysicsController::OnLateUpdate() {
 
 }
 
+void MythicalRuins::PhysicsController::OnDisable() {
+    m_ObjectLoader = nullptr;
+}
+
+
 void MythicalRuins::PhysicsController::OnDestroy() {
 
 }
@@ -29,12 +34,7 @@ bool MythicalRuins::PhysicsController::CanMove(MythicalRuins::Object* obj, Vecto
             obj->Size.y
     };
 
-    auto* app = MythicalRuins::Application::Get();
-    if (!app) return false;
-
-    auto& objectCtr = app->GetObjectController();
-
-    for (const auto& otherPtr : objectCtr.GetAllObjects()) {
+    for (const auto& otherPtr : m_ObjectLoader->GetAllObjects()) {
         Object* other = otherPtr.get();
 
         if (other == obj) continue;

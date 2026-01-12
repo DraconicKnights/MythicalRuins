@@ -4,10 +4,11 @@
 #include <memory>
 #include <vector>
 #include "../Render/Object/Object.h"
+#include "../System/Singleton.h"
 
 namespace MythicalRuins {
 
-    class ObjectLoaderManager {
+    class ObjectLoaderManager : public Singleton<ObjectLoaderManager> {
     public:
         template<typename T, typename... Args>
         T& Spawn(Args&&... args) {

@@ -3,7 +3,8 @@
 #include "raylib.h"
 #include "System/SystemsControllers/PlayerController.h"
 #include "System/SystemsControllers/RendererController.h"
-#include "System/SystemsControllers/PhysicsController.h"
+#include "System/Physics/PhysicsController.h"
+#include "Manager/InputManager.h"
 
 MythicalRuins::Application* MythicalRuins::Application::G_Instance = nullptr;
 
@@ -30,10 +31,15 @@ void MythicalRuins::Application::SetResolution(const MythicalRuins::ApplicationS
 }
 
 void MythicalRuins::Application::RunApp() {
+
+    std::cout << "Before InitApp\n";
     IntiApp();
+    std::cout << "After InitApp\n";
 
     const float fixedDt = 1.0f / 60.0f;
     float accumulator = 0.0f;
+
+    m_SystemManager.EnableAll();
 
     while (!WindowShouldClose()) {
 
@@ -59,6 +65,8 @@ void MythicalRuins::Application::RunApp() {
         m_SystemManager.LateUpdateAll();
     }
 
+    m_SystemManager.DisableAll();
+
     m_SystemManager.DestroyAll();
     CloseWindow();
 }
@@ -66,22 +74,23 @@ void MythicalRuins::Application::RunApp() {
 void MythicalRuins::Application::IntiApp() {
     InitWindow(m_AppSpecs.Width, m_AppSpecs.Height, m_AppSpecs.Title);
 
+    Logger::setLogLevel(LogLevel::Debug);
+
     rlImGuiSetup(true);
-
-    m_EventListener.BindKey(InputAction::MoveForward, KEY_W);
-    m_EventListener.BindKey(InputAction::MoveBack, KEY_S);
-    m_EventListener.BindKey(InputAction::MoveRight, KEY_D);
-    m_EventListener.BindKey(InputAction::MoveLeft, KEY_A);
-
-    m_EventListener.BindKey(InputAction::OpenDebugConsole, KEY_F10);
-
-    m_EventListener.BindMouse(InputAction::DeltaLeftClick, MOUSE_BUTTON_LEFT);
-    m_EventListener.BindMouse(InputAction::DeltaRightClick, MOUSE_BUTTON_RIGHT);
 
     SetTargetFPS(60);
 
-    m_SystemManager.AddSystem<RendererController>();
-    m_SystemManager.AddSystem<PhysicsController>();
-    m_SystemManager.AddSystem<PlayerController>();
+    m_GameState = GameState::Playing;
+
+    // Core Systems
+    m_SystemManager.AddSystem<InputManager>(0);
+
+    m_SystemManager.AddSystem<TileMap>(10);
+    m_SystemManager.AddSystem<RendererController>(20);
+    m_SystemManager.AddSystem<PhysicsController>(30);
+    m_SystemManager.AddSystem<PlayerController>(40);
+
+    std::cout << "Before StartAll\n";
     m_SystemManager.StartAll();
+    std::cout << "After StartAll\n";
 }

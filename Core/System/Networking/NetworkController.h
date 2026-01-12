@@ -3,16 +3,11 @@
 
 #include <winsock.h>
 #include <thread>
+#include <vector>
+#include <queue>
 #include "../SystemCore.h"
 
 namespace MythicalRuins {
-
-    struct ClientInfo {
-        SOCKET socket;
-        int playerIdentifier;
-        std::thread clientThread;
-        bool IsConnected;
-    };
 
     class NetworkController : public SystemCore {
     public:
@@ -20,8 +15,9 @@ namespace MythicalRuins {
         void OnUpdate() override;
         void OnDestroy() override;
 
-        void Start();
-        void Shutdown();
+        const char* GetName() override { return "NetworkController"; }
+
+    private:
     };
 
 } // MysticalRuins

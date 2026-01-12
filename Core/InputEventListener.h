@@ -7,10 +7,11 @@
 #include <vector>
 #include <functional>
 #include "InputActions.h"
+#include "System/Singleton.h"
 
 namespace MythicalRuins {
 
-    class InputEventListener {
+    class InputEventListener : public Singleton<InputEventListener> {
     public:
 
         void BindKey(InputAction action, int rayLibKey);

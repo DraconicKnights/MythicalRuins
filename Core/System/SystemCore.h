@@ -8,9 +8,11 @@ namespace MythicalRuins {
         virtual ~SystemCore() = default;
 
         virtual void OnStart() {}
+        virtual void OnEnable() {}
         virtual void OnUpdate() {}
         virtual void OnFixedUpdate() {}
         virtual void OnLateUpdate() {}
+        virtual void OnDisable() {}
         virtual void OnDestroy() {}
 
         bool IsEnabled() const { return Enabled; }
@@ -18,6 +20,8 @@ namespace MythicalRuins {
 
         int Priority() const { return LoadPriority; }
         void SetPriority(int p) { LoadPriority = p; }
+
+        virtual const char* GetName() { return "SystemCore"; }
 
     private:
         bool Enabled = true;

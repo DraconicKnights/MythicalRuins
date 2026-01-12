@@ -4,12 +4,13 @@
 #include <cstdint>
 #include <string>
 #include <vector>
+
 #include "../SystemCore.h"
+#include "raylib.h"
 
 namespace MythicalRuins {
 
     enum class MenuPage : std::uint8_t { Home, Settings, Host, Join, Servers };
-
     enum class NetStatus : std::uint8_t { Idle, Hosting, Connecting, Connected, Error };
 
     struct VideoSettings {
@@ -27,45 +28,12 @@ namespace MythicalRuins {
         int Ping = 0;
     };
 
-    class MainMenuController : public SystemCore  {
+    class MainMenuController : public SystemCore {
     public:
-        void OnStart() override;
-        void OnUpdate() override;
 
-        void BuildUI();
-
-        MenuPage GetPage() const { return m_Page; }
-        void SetPage(MenuPage menuPage) { m_Page = menuPage; }
-
-    private:
-        MenuPage m_Page = MenuPage::Home;
-
-        VideoSettings m_AppliedVideo{};
-        VideoSettings m_PendingVideo{};
-
-        char m_Ip[64] = "127.0.0.1";
-        int  m_Port = 7777;
-        NetStatus m_NetStatus = NetStatus::Idle;
-        char m_NetError[128] = "";
-
-        std::vector<ServerInfo> m_Servers;
-        int m_SelectedServer = -1;
-
-    private:
-        void DrawSidebar();
-        void DrawHome();
-        void DrawSettings();
-        void DrawHost();
-        void DrawJoin();
-        void DrawServers();
-
-        void ApplyVideoSettings();
-        void RevertPendingVideo();
-        bool ValidatePort(int port, const char* contextLabel);
-
-        const char* NetStatusToString(NetStatus s) const;
+        const char* GetName() override { return "MainMenuController"; }
     };
 
-} // MyhticalRuins
+} // namespace MythicalRuins
 
-#endif //MAINMENUCONTROLLER_H
+#endif // MAINMENUCONTROLLER_H

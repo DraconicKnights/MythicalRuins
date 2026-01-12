@@ -1,30 +1,40 @@
 #include <rlImGui.h>
 #include "RendererController.h"
-#include "../../Application.h"
 
 void MythicalRuins::RendererController::OnStart() {
+    m_App = MythicalRuins::Application::Get();
 
+    m_ObjectLoader = ObjectLoaderManager::Get();
+    m_Systems = SystemManager::Get();
+
+    m_Tilemap = m_Systems->GetSystem<TileMap>();
+    m_Debug = m_Systems->GetSystem<DebugConsoleController>();
 }
 
 void MythicalRuins::RendererController::OnUpdate() {
-    auto* app = MythicalRuins::Application::Get();
-    if (!app) return;
-
     BeginDrawing();
     ClearBackground(LIGHTGRAY);
 
-    if (app->IsPlaying()) {
-        for (const auto &e: app->GetObjectController().GetAllObjects()) {
+    if (m_App->IsPlaying()) {
+        for (const auto& e : m_ObjectLoader->GetAllObjects()) {
             e->Render();
         }
+
     }
 
     rlImGuiBegin();
-    app->GetMenuController().BuildUI();
-    app->GetDebugConsoleController().render();
+
     rlImGuiEnd();
 
     EndDrawing();
+}
+
+void MythicalRuins::RendererController::OnDisable() {
+    m_App = nullptr;
+    m_ObjectLoader = nullptr;
+    m_Systems = nullptr;
+    m_Tilemap = nullptr;
+    m_Debug = nullptr;
 }
 
 void MythicalRuins::RendererController::OnDestroy() {

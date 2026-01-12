@@ -4,6 +4,7 @@
 #include <vector>
 #include "../SystemCore.h"
 #include "../../Render/Object/Object.h"
+#include "../../World/ObjectLoaderManager.h"
 
 namespace MythicalRuins {
 
@@ -13,11 +14,14 @@ namespace MythicalRuins {
         void OnUpdate() override;
         void OnFixedUpdate() override;
         void OnLateUpdate() override;
+        void OnDisable() override;
         void OnDestroy() override;
 
         bool CanMove(Object* obj, Vector2 newPos);
         bool LayersCollide(const Object* a, const Object* b);
     private:
+
+        ObjectLoaderManager* m_ObjectLoader = nullptr;
     };
 
 } // MythicalRuins

@@ -1,7 +1,13 @@
 #include "SystemManager.h"
+#include "../../Utils/ScopedTimer.h"
 
 void MythicalRuins::SystemManager::StartAll() {
+    SortByPriority();
     for (auto& s: m_Systems) s->OnStart();
+}
+
+void MythicalRuins::SystemManager::EnableAll() {
+    for (auto& s : m_Systems) s->OnEnable();
 }
 
 void MythicalRuins::SystemManager::UpdateAll() {
@@ -14,6 +20,10 @@ void MythicalRuins::SystemManager::FixedUpdateAll() {
 
 void MythicalRuins::SystemManager::LateUpdateAll() {
     for (auto& s : m_Systems) s-> OnLateUpdate();
+}
+
+void MythicalRuins::SystemManager::DisableAll() {
+    for (auto& s : m_Systems) s->OnDisable();
 }
 
 void MythicalRuins::SystemManager::DestroyAll() {
